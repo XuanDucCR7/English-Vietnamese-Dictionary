@@ -1,23 +1,12 @@
-
 import java.util.*;
 
 public class DictionaryCommandline {
-    private boolean play;
-
-    public void setPlay(boolean play) {
-        this.play = play;
-    }
-
-    public boolean getPlay(){
-        return play;
-    }
-
+    
     public void showAllWord(Dictionary dictionary){
         System.out.println("No\t|English\t|Vietnamese");
         int index = 1;
         for(Word dic : dictionary.getDictionary()){
-            System.out.println(index + "\t|" + dic.getWord_target() + "\t|"
-                    + dic.getWord_explain());
+            System.out.println(index + "\t|" + dic.getWord_target() + "\t|" + dic.getWord_explain());
             index++;
         }
     }
@@ -40,7 +29,7 @@ public class DictionaryCommandline {
                 dictionaryBasic(dictionary);    //quay lai menu chinh
                 break;
             case 3:
-                setPlay(false);
+                System.exit(0);                 //thoat chuong trinh
                 break;
             default:
                 dictionaryBasic(dictionary);

@@ -32,39 +32,29 @@ public class DictionaryManagement {
         }
     }
 
-    public void insertFromFile(Dictionary dictionary) throws IOException {
+    public void insertFromFile(Dictionary dictionary) {
 
-        InputStream in = new FileInputStream("dictionaries.txt");
-        BufferedReader buf = new BufferedReader(new InputStreamReader(in));
+        File file = new File("dictionaries.txt");
+        
+        try {
+            Scanner scan = new Scanner(file);
+            String line = "";
+            
+            while (scan.hasNextLine()) {
 
-        String line = "";
-        while (line != null) {
+                Word word = new Word();
 
-            line = buf.readLine();
-            if (line == null) { // check EOF
-                break;
-            }
+                line = scan.next();
+                word.setWord_target(line);
 
-            int index = 0;
-            String target = "", explain;
-            Word word = new Word();
+                line = scan.nextLine();
+                word.setWord_explain(line.substring(1)); // skip tab
 
-            // get word
-            for (index = 0; line.charAt(index) != '\t' && line.charAt(index) != ' '; ++index) {
-                target += line.charAt(index);
-            }
-            // skip whitespace
-            for (; line.charAt(index) == '\t' || line.charAt(index) == ' '; ++index);
-            // get explain
-            explain = line.substring(index);
-
-            word.setWord_target(target);
-            word.setWord_explain(explain);
-
-            //truong hop nhap word khong nhap explain or nguoc lai
-            if(word.getWord_target() != null && word.getWord_explain() != null){
                 dictionary.setDictionary(word);
             }
+        } 
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

@@ -38,7 +38,7 @@ public class DictionaryCommandline {
         }
     }
 
-    public void dictionaryAdvanced(Dictionary dictionary) throws IOException {
+    public void dictionaryAdvanced(Dictionary dictionary) {
 
         System.out.println("Please enter:\n1: If you want to insert a list of words from file.\n2: If you want to show all words." +
                 "\n3: If you want to look up a word.\n4: Exit.");

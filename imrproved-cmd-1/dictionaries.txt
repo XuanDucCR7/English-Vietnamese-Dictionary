@@ -1,4 +1,4 @@
-hello   xin chao
-teacher     giao vien
-student     sinh vien
-cat     meo
+hello	xin chao
+teacher	giao vien
+student	sinh vien
+book	sach

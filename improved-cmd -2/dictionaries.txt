@@ -1,0 +1,8 @@
+Hello	Xin chao
+Tranform	Van chuyen
+Transit	Qua canh
+Translate	Dich 
+Dog	Con cho
+Cat	Con meo
+Disappointed	That vong
+Computer	May tinh de ban

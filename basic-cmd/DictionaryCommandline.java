@@ -15,8 +15,8 @@ public class DictionaryCommandline {
 
     public String formatSpace(String st){
         int length = 18 - st.length();
-        String space = " 1" +
-                "";
+        String space = " ";
+         
         for(int i = 0; i < length; i++)
             space += " ";
         return space;

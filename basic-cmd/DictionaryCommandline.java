@@ -3,12 +3,23 @@ import java.util.*;
 public class DictionaryCommandline {
     
     public void showAllWord(Dictionary dictionary){
-        System.out.println("No\t|English\t|Vietnamese");
+        System.out.println("No\t|English\t\t\t|Vietnamese");
         int index = 1;
         for(Word dic : dictionary.getDictionary()){
-            System.out.println(index + "\t|" + dic.getWord_target() + "\t|" + dic.getWord_explain());
+            System.out.println(index + "\t|" + dic.getWord_target() + formatSpace(dic.getWord_target())+ "|" + dic.getWord_explain());
             index++;
         }
+    }
+
+
+
+    public String formatSpace(String st){
+        int length = 18 - st.length();
+        String space = " 1" +
+                "";
+        for(int i = 0; i < length; i++)
+            space += " ";
+        return space;
     }
 
     public void dictionaryBasic(Dictionary dictionary){

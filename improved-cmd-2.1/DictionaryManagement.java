@@ -37,7 +37,7 @@ public class DictionaryManagement {
     public void insertFromFile(Dictionary dictionary) {
 
         File file = new File("dictionaries.txt");
-        
+
         try {
             Scanner scan = new Scanner(file);
             String line = "";
@@ -54,6 +54,7 @@ public class DictionaryManagement {
 
                 dictionary.setDictionary(word);
             }
+
             System.out.println("Done!!");
         } 
         catch (FileNotFoundException e) {
@@ -100,7 +101,7 @@ public class DictionaryManagement {
 
     public void dictionaryChange(Dictionary dictionary){
         Scanner scan = new Scanner(System.in);
-        System.out.print("Please enter the word which you want to change: ");
+        System.out.print("Please enter the word which you want to chage: ");
         String change = scan.nextLine();
 
         ArrayList<Word> wordList = dictionary.getDictionary(); // danh sach cac tu trong database

@@ -4,7 +4,7 @@ import java.io.*;
 public class DictionaryCommandline {
     
     public void showAllWord(Dictionary dictionary){
-        System.out.println("No\t|English\t\t\t|Vietnamese");
+        System.out.println("No\t|English\t\t|Vietnamese");
         int index = 1;
         for(Word dic : dictionary.getDictionary()){
             System.out.println(index + "\t|" + dic.getWord_target() + formatSpace(dic.getWord_target())+ "|"  + dic.getWord_explain());
@@ -62,7 +62,15 @@ public class DictionaryCommandline {
 
         DictionaryManagement management = new DictionaryManagement();
         Scanner scan = new Scanner(System.in);
-        int request = scan.nextInt();
+        String check = scan.nextLine();
+        int request = 0;
+
+        //neu nguoi dung nhap vao kieu khaa integer
+        try{
+            request = Integer.parseInt(check);
+        }catch(NumberFormatException e){
+            dictionaryAdvanced(dictionary);
+        }
 
         switch(request){
             case 1:

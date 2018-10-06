@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="564.0" prefWidth="834.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerDashboard">
+   <children>
+      <VBox id="Option" alignment="BOTTOM_LEFT" layoutX="5.0" layoutY="434.0" prefHeight="116.0" prefWidth="124.0">
+         <children>
+             <Button id="Setting" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+                 <graphic>
+                     <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/setting.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+             <Button id="Information" mnemonicParsing="false" prefHeight="49.0" prefWidth="57.0" styleClass="hover_border" stylesheets="@../CSS/button.css">
+                 <graphic>
+                     <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/information.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="138.0" layoutY="110.0" prefHeight="440.0" prefWidth="213.0">
+         <children>
+            <TabPane prefHeight="439.0" prefWidth="224.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab id="Search" text="Search">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="230.0">
+                           <children>
+                              <TextField layoutY="1.0" prefHeight="31.0" prefWidth="212.0" promptText="Search" fx:id="search"/>
+                              <ListView layoutY="32.0" prefHeight="378.0" prefWidth="212.0" fx:id="listWord"/>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab id="Recent" text="Recent">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView layoutY="3.0" prefHeight="407.0" prefWidth="212.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab id="Favourite" text="Favourite">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView prefHeight="411.0" prefWidth="212.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+      <VBox layoutX="352.0" layoutY="155.0" prefHeight="388.0" prefWidth="55.0">
+         <children>
+             <Button id="Favourtite" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+                 <graphic>
+                     <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/favourite.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+             <Button id="Note" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+                 <graphic>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/note.jpg" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+             <Button id="Add" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+                 <graphic>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/add.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+             <Button id="speaker" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+                 <graphic>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/speaker.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+             <Button id="Delete" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+                 <graphic>
+                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/delete.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+         </children>
+      </VBox>
+      <VBox id="Denifition" layoutX="408.0" layoutY="155.0" prefHeight="388.0" prefWidth="424.0" />
+      <HBox id="Logo" layoutX="14.0" prefHeight="105.0" prefWidth="195.0">
+         <children>
+            <ImageView fitHeight="105.0" fitWidth="222.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/logo1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox layoutX="218.0" prefHeight="105.0" prefWidth="612.0" />
+      <HBox layoutX="581.0" layoutY="104.0" prefHeight="46.0" prefWidth="249.0" />
+      <Label layoutX="408.0" layoutY="105.0" prefHeight="46.0" prefWidth="171.0" style="-fx-background-size: 20;" text="Definition" textFill="#3a11dd">
+         <font>
+            <Font name="Times New Roman Bold" size="25.0" />
+         </font>
+      </Label>
+      <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="142.0" prefHeight="293.0" prefWidth="125.0">
+         <children>
+             <Button id="google Translate" contentDisplay="TOP" mnemonicParsing="false" prefHeight="59.0" prefWidth="124.0" text="Google Traslate" textFill="#3a12cd">
+                 <graphic>
+                     <ImageView fitHeight="34.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../Images/googleTraslate.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+             </Button>
+            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.0" prefWidth="127.0" text="Your Dictionary" textFill="#f50e0e">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+                <graphic>
+                    <ImageView fitHeight="37.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../Images/yourDictionary.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

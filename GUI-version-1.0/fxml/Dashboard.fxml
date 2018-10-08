@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.paint.*?>
@@ -42,8 +43,8 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="230.0">
                            <children>
-                              <TextField layoutY="1.0" prefHeight="31.0" prefWidth="212.0" promptText="Search" fx:id="search"/>
-                              <ListView layoutY="32.0" prefHeight="378.0" prefWidth="212.0" fx:id="listWord"/>
+                              <TextField fx:id="search" layoutY="1.0" prefHeight="31.0" prefWidth="212.0" promptText="Search" />
+                              <ListView fx:id="listWord" layoutY="32.0" prefHeight="378.0" prefWidth="212.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -119,7 +120,10 @@
              </Button>
          </children>
       </VBox>
-      <VBox id="Denifition" layoutX="408.0" layoutY="155.0" prefHeight="388.0" prefWidth="424.0" />
+      <VBox id="Denifition" layoutX="408.0" layoutY="155.0" prefHeight="388.0" prefWidth="424.0">
+         <children>
+            <WebView fx:id="webView" prefHeight="388.0" prefWidth="424.0" />
+         </children></VBox>
       <HBox id="Logo" layoutX="14.0" prefHeight="105.0" prefWidth="195.0">
          <children>
             <ImageView fitHeight="105.0" fitWidth="222.0" pickOnBounds="true" preserveRatio="true">

@@ -1,6 +1,9 @@
 package Controller;
 
 import Dictionary.GoogleTranslate;
+import Dictionary.LanguageCode;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,68 +31,47 @@ public class controllerGoogleTranslate implements Initializable {
     @FXML
     private TextArea targetText;
 
-    private MenuItem Vietnamese = new MenuItem("Vietnamese");
-    private MenuItem English = new MenuItem("English");
-
+    //Combo Box
     @FXML
-    private MenuButton sourceLanguage = new MenuButton("Language",null,Vietnamese,English);
-
+    private ComboBox<String> SourceLanguage;
     @FXML
-    private MenuButton targetLanguage = new MenuButton("Language",null,Vietnamese,English);
+    private ComboBox<String> TargetLanguage;
+
+    //LangueCode
+    private String SourceLanguageCode;
+    private String TargetLanguageCode;
+    private LanguageCode Code = new LanguageCode();
+
+    ObservableList<String> OptionSource = FXCollections.observableArrayList(
+            "English", "Vietnamese", "Japan", "German"
+    );
+    ObservableList<String> OptionTarget = FXCollections.observableArrayList(
+            "English", "Vietnamese", "Japan", "German"
+    );
+
+    public controllerGoogleTranslate() {
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        SourceLanguage.setItems(OptionSource);
+        TargetLanguage.setItems(OptionTarget);
     }
 
-    //Menu button
-    public void clickSourceVietnamese (ActionEvent e){
-        sourceLanguage.setText(Vietnamese.getText());
+    public void chooseSourceLanguage(ActionEvent e) throws IOException {
+        SourceLanguageCode = Code.getLanguageCode(SourceLanguage.getValue());
+        sourceText.setText(GoogleTranslate.translate(SourceLanguageCode,sourceText.getText()));
     }
 
-    public void clickTargetVietnamese (ActionEvent e){
-        targetLanguage.setText(Vietnamese.getText());
-    }
-
-    public void clickSourceEnglish (ActionEvent e){
-        sourceLanguage.setText(English.getText());
-    }
-
-    public void clickTargetEnglish (ActionEvent e){
-        targetLanguage.setText(English.getText());
+    public void chooseTargetLanguage(ActionEvent e) throws IOException {
+        TargetLanguageCode = Code.getLanguageCode(TargetLanguage.getValue());
+        targetText.setText(GoogleTranslate.translate(TargetLanguageCode,targetText.getText()));
     }
 
     //SourceText and TargetText
-    Stack<String> stackSourceText = new Stack();
-    Vector<String> vectorSource = new Vector();
-    String temptSourceText = "";
     public void getSourceText(KeyEvent e) throws IOException {
-        temptSourceText = sourceText.getText();
-
-        switch (e.getCode()){
-            case BACK_SPACE: {
-                if (stackSourceText.size() > 1) {
-                    stackSourceText.pop();
-                    temptSourceText = sourceText.getText();
-                    System.out.println(stackSourceText.peek());
-                }
-                else{
-                    stackSourceText.remove(0);
-                    temptSourceText = sourceText.getText();
-                    targetText.setText("");
-                    System.out.println(stackSourceText.peek());
-                }
-                break;
-            }
-            default:
-                stackSourceText.push(temptSourceText);
-                break;
-        }
-
-
         try{
-            //System.out.println(GoogleTranslate.getDisplayLanguage("VietnamesE"));
-            targetText.setText(GoogleTranslate.translate("en","vi",stackSourceText.peek()));
+            targetText.setText(GoogleTranslate.translate(SourceLanguageCode,TargetLanguageCode,sourceText.getText()));
         }catch(IOException ex){
             ex.getStackTrace();
         }

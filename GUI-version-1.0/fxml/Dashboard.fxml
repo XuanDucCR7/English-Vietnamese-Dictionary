@@ -43,7 +43,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="230.0">
                            <children>
-                              <TextField fx:id="search" layoutY="1.0" prefHeight="31.0" prefWidth="212.0" promptText="Search" />
+                              <TextField fx:id="search" layoutY="1.0" onKeyPressed="#handleSearchEvent" prefHeight="31.0" prefWidth="212.0" promptText="Search" />
                               <ListView fx:id="listWord" layoutY="32.0" prefHeight="378.0" prefWidth="212.0" />
                            </children>
                         </AnchorPane>
@@ -109,7 +109,7 @@
                      </ImageView>
                  </graphic>
              </Button>
-             <Button id="Delete" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+             <Button id="Delete" mnemonicParsing="false" onMouseClicked="#handleDeleteEvent" styleClass="hover_border" stylesheets="@../CSS/button.css">
                  <graphic>
                      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                          <image>

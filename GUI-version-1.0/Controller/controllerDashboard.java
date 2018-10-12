@@ -3,6 +3,7 @@ package Controller;
 import Dictionary.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -40,9 +42,10 @@ public class controllerDashboard implements Initializable {
     private WebEngine webEngine;
 
     private ObservableList<String> items = FXCollections.observableArrayList();
+    private FilteredList<String> filteredItems = new FilteredList<>(items, e -> true);
 
     private void loadDatabase() {
-        String query = "SELECT word FROM tbl_edict";
+        String query = "SELECT word FROM av";
         try {
             st = con.prepareStatement(query);
             rs = st.executeQuery();
@@ -59,24 +62,94 @@ public class controllerDashboard implements Initializable {
         }
     }
 
-    private void handleSelectEvent() {
-        listWord.setOnMouseClicked(e -> {
-            String query = "SELECT * FROM tbl_edict WHERE word=?";
+    private void refreshDatabase() {
+        String query = "SELECT word FROM av";
+        try {
+            st = con.prepareStatement(query);
+            rs = st.executeQuery();
 
-            try {
+            items.clear();
+            while (rs.next()) {
+                items.add(rs.getString(1));
+            }
+            st.close();
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleDeleteEvent() {
+        try {
+            String selected = listWord.getSelectionModel().getSelectedItem();
+            System.out.println(selected);
+
+            if (selected != null) {
+                String query = "DELETE FROM av WHERE word=?";
                 st = con.prepareStatement(query);
-                st.setString(1, listWord.getSelectionModel().getSelectedItem());
-                rs = st.executeQuery();
+                st.setString(1, selected);
+                st.executeUpdate();
 
-                while (rs.next()) {
-                    webEngine.loadContent(rs.getString("detail"));
-                }
                 st.close();
                 rs.close();
 
-            } catch (SQLException se) {
-                se.printStackTrace();
+                refreshDatabase();
+                webEngine.loadContent("");
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displaySelectedItem() {
+        String query = "SELECT html FROM av WHERE word=?";
+
+        try {
+            st = con.prepareStatement(query);
+            st.setString(1, listWord.getSelectionModel().getSelectedItem());
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                webEngine.loadContent(rs.getString(1));
+            }
+            st.close();
+            rs.close();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+    }
+
+    private void handleSelectEvent() {
+        listWord.setOnMouseClicked(e -> {
+            displaySelectedItem();
+        });
+
+        listWord.setOnKeyPressed(e -> {
+            KeyCode keyCode = e.getCode();
+            if (keyCode == KeyCode.ENTER) {
+                displaySelectedItem();
+            }
+        });
+    }
+
+    @FXML
+    public void handleSearchEvent() {
+        listWord.setItems(filteredItems);
+
+        search.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            filteredItems.setPredicate(word -> {
+                if (newValue == null || newValue.isEmpty()) return true;
+
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (word.toLowerCase().startsWith(lowerCaseFilter)) return true;
+
+                return false;
+            });
+            listWord.setItems(filteredItems);
         });
     }
 

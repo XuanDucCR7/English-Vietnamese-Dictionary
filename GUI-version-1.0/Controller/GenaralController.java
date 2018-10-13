@@ -26,6 +26,7 @@ public class GenaralController {
     protected ResultSet rs;
 
     protected ObservableList<String> items = FXCollections.observableArrayList();
+    protected ObservableList<String> favoriteWord = FXCollections.observableArrayList();
     protected FilteredList<String> filteredItems = new FilteredList<>(items, e -> true);
 
     protected void refreshDatabase() {
@@ -42,6 +43,25 @@ public class GenaralController {
             rs.close();
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void refreshListWordFavorite(){
+        String query1 = "SELECT word FROM av WHERE favorite = ? ";
+        try{
+            st = con.prepareStatement(query1);
+            st.setString(1,"1");
+            rs = st.executeQuery();
+
+            favoriteWord.clear();
+            while (rs.next()) {
+                favoriteWord.add(rs.getString(1));
+            }
+            st.close();
+            rs.close();
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -82,6 +102,40 @@ public class GenaralController {
 
         } catch (SQLException e1) {
             e1.printStackTrace();
+        }
+    }
+
+    protected void addFavorite(ListView<String> listWord){
+        String selected = listWord.getSelectionModel().getSelectedItem();
+        String query = "UPDATE av SET favorite = ? WHERE word = ?";
+        try{
+            st = con.prepareStatement(query);
+            st.setString(1,selected);
+            st.setString(2,selected);
+            st.executeUpdate();
+            st.close();
+
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+
+        String query1 = "SELECT word FROM av WHERE favorite = ?";
+        try{
+            st = con.prepareStatement(query1);
+            st.setString(1,selected);
+            rs = st.executeQuery();
+
+            favoriteWord.clear();
+            while (rs.next()) {
+                favoriteWord.add(rs.getString(1));
+
+            }
+            st.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

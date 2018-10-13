@@ -21,6 +21,8 @@ public class controllerDashboard extends GenaralController implements Initializa
     @FXML
     private ListView<String> listWord;
     @FXML
+    private ListView<String> listWordFavorite;
+    @FXML
     private WebView webView;
     private WebEngine webEngine;
 
@@ -32,12 +34,31 @@ public class controllerDashboard extends GenaralController implements Initializa
 
             while (rs.next()) {
                 items.add(rs.getString(1));
-                listWord.setItems(items);
             }
+            listWord.setItems(items);
             st.close();
             rs.close();
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String query1 = "SELECT word FROM av WHERE favorite = ? ";
+        try{
+            st = con.prepareStatement(query1);
+            st.setString(1,"1");
+            rs = st.executeQuery();
+
+            favoriteWord.clear();
+            while (rs.next()) {
+                favoriteWord.add(rs.getString(1));
+                listWordFavorite.setItems(favoriteWord);
+
+            }
+            st.close();
+            rs.close();
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -100,6 +121,25 @@ public class controllerDashboard extends GenaralController implements Initializa
     public void TextToSpeak(ActionEvent e){
         String Text = listWord.getSelectionModel().getSelectedItem();
         TextToSpeak.playSound(Text);
+    }
+
+    public void addFavoriteWord(){
+        String selected = listWord.getSelectionModel().getSelectedItem();
+        String query = "UPDATE av SET favorite = ? WHERE word = ?";
+        try{
+            st = con.prepareStatement(query);
+            st.setString(1,"1");
+            st.setString(2,selected);
+            st.executeUpdate();
+            st.close();
+
+
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+
+        refreshListWordFavorite();
+
     }
 
     public void clickGoogleTranslate(ActionEvent e) throws IOException {

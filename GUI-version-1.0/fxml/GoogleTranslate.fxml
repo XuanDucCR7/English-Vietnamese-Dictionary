@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="470.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerGoogleTranslate">
+<AnchorPane prefHeight="426.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerGoogleTranslate">
    <children>
-      <Label layoutX="292.0" layoutY="32.0" prefHeight="68.0" prefWidth="251.0" text="Google Translate" textFill="#290ce1">
+      <Label layoutX="222.0" layoutY="32.0" prefHeight="68.0" prefWidth="251.0" text="Google Translate" textFill="#290ce1">
          <graphic>
             <ImageView fitHeight="69.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -22,35 +22,54 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <VBox layoutX="174.0" layoutY="139.0" prefHeight="257.0" prefWidth="286.0">
+      <VBox layoutX="37.0" layoutY="136.0" prefHeight="257.0" prefWidth="286.0">
          <children>
             <TextArea fx:id="sourceText" onDragDetected="#getSourceText" onKeyReleased="#getSourceText" prefHeight="274.0" prefWidth="240.0">
                <font>
-                  <Font name="Times New Roman Bold" size="14.0" />
-               </font></TextArea>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </TextArea>
          </children>
       </VBox>
-      <VBox layoutX="508.0" layoutY="139.0" prefHeight="250.0" prefWidth="286.0">
+      <VBox layoutX="375.0" layoutY="136.0" prefHeight="257.0" prefWidth="286.0">
          <children>
             <TextArea fx:id="targetText" editable="false" prefHeight="420.0" prefWidth="319.0" wrapText="true">
                <font>
-                  <Font name="Times New Roman Bold" size="14.0" />
+                  <Font name="Times New Roman" size="16.0" />
                </font></TextArea>
          </children>
       </VBox>
-      <Button layoutX="14.0" layoutY="139.0" mnemonicParsing="false" onAction="#goBackDashBoard" prefHeight="48.0" prefWidth="141.0" text="HomePage" textFill="#f8220a">
+      <Button layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackDashBoard" prefHeight="48.0" prefWidth="141.0" text="HomePage" textFill="#f8220a">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/hompage.png" />
+                  <Image url="@../Images/homepage.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <ComboBox fx:id="SourceLanguage" layoutX="174.0" layoutY="114.0" onAction="#chooseSourceLanguage" prefHeight="25.0" prefWidth="116.0" promptText="Language" />
-      <ComboBox fx:id="TargetLanguage" layoutX="508.0" layoutY="114.0" onAction="#chooseTargetLanguage" prefHeight="25.0" prefWidth="116.0" promptText="Language" />
+      <ComboBox fx:id="SourceLanguage" layoutX="37.0" layoutY="109.0" onAction="#chooseSourceLanguage" prefHeight="26.0" prefWidth="116.0" promptText="Language" />
+      <ComboBox fx:id="TargetLanguage" layoutX="375.0" layoutY="110.0" onAction="#chooseTargetLanguage" prefHeight="26.0" prefWidth="116.0" promptText="Language" />
+      <Button id="SourceSpeech" layoutX="153.0" layoutY="109.0" mnemonicParsing="false" onAction="#chooseSourceSpeech" prefHeight="25.0" prefWidth="31.0" styleClass="hover_border" stylesheets="@../CSS/button.css">
+         <graphic>
+            <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/speaker.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="TargetSpeech" layoutX="491.0" layoutY="110.0" mnemonicParsing="false" onAction="#chooseTargetSpeech" prefHeight="25.0" prefWidth="31.0" styleClass="hover_border" stylesheets="@../CSS/button.css">
+         <graphic>
+            <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/speaker.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

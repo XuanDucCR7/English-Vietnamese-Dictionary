@@ -8,7 +8,7 @@ public class DatabaseConnection {
 
         try {
             Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection("jdbc:sqlite:C:/Users/Khoa/Desktop/km-dictionary/GUI-1.0/Database/dict_hh.db");
+            return DriverManager.getConnection("jdbc:sqlite:D:/PROJECT/KM-DIctionary-pro/src/Database/dict_hh.db");
         }
         catch (Exception e) {
             e.printStackTrace();

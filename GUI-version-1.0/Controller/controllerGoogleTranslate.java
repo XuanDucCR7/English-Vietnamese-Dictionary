@@ -1,30 +1,22 @@
 package Controller;
 
-import Dictionary.GoogleTranslate;
 import Dictionary.LanguageCode;
+import Dictionary.TextToSpeak;
+import Dictionary.showAlert;
+import com.darkprograms.speech.translator.GoogleTranslate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Stack;
-import java.util.Vector;
 
-public class controllerGoogleTranslate implements Initializable {
+public class controllerGoogleTranslate extends GenaralController implements Initializable {
 
     @FXML
     private TextArea sourceText;
@@ -43,10 +35,10 @@ public class controllerGoogleTranslate implements Initializable {
     private LanguageCode Code = new LanguageCode();
 
     ObservableList<String> OptionSource = FXCollections.observableArrayList(
-            "English", "Vietnamese", "Japan", "German"
+            "English", "Vietnamese", "Japan", "Thailand"
     );
     ObservableList<String> OptionTarget = FXCollections.observableArrayList(
-            "English", "Vietnamese", "Japan", "German"
+            "English", "Vietnamese", "Japan", "Thailand"
     );
 
     public controllerGoogleTranslate() {
@@ -68,22 +60,33 @@ public class controllerGoogleTranslate implements Initializable {
         targetText.setText(GoogleTranslate.translate(TargetLanguageCode,targetText.getText()));
     }
 
-    //SourceText and TargetText
+    public void chooseSourceSpeech(ActionEvent e){
+        TextToSpeak.playSound(sourceText.getText());
+    }
+
+    public void chooseTargetSpeech(ActionEvent e){
+        TextToSpeak.playSound(targetText.getText());
+    }
+
+    //
     public void getSourceText(KeyEvent e) throws IOException {
-        try{
-            targetText.setText(GoogleTranslate.translate(SourceLanguageCode,TargetLanguageCode,sourceText.getText()));
-        }catch(IOException ex){
-            ex.getStackTrace();
+        if(SourceLanguageCode == null || TargetLanguageCode == null){
+            showAlert.AlertInfo("Please choose language");
+            sourceText.setText("");
+            targetText.setText("");
+        }else{
+            try{
+                targetText.setText(GoogleTranslate.translate(SourceLanguageCode,TargetLanguageCode,sourceText.getText()));
+            }catch(IOException ex){
+                ex.getStackTrace();
+            }
         }
+
 
     }
 
     public void goBackDashBoard(ActionEvent e) throws IOException {
-        Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-        Parent DashBoardView = FXMLLoader.load(getClass().getResource("../fxml/DashBoard.fxml"));
-        Scene scene = new Scene(DashBoardView);
-        stage.setScene(scene);
-        stage.show();
+        changeScene(e,"../fxml/DashBoard.fxml");
     }
 
 }

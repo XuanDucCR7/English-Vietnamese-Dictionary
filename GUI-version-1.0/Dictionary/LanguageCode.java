@@ -8,7 +8,7 @@ public class LanguageCode{
         LanguageCode.put("Vietnamese","vi");
         LanguageCode.put("English","en");
         LanguageCode.put("Japan","ja");
-        LanguageCode.put("German","db");
+        LanguageCode.put("Thailand","th");
     }
 
     public String getLanguageCode(String Language){

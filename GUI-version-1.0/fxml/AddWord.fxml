@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerAddWord">
+   <children>
+      <Button layoutX="6.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackDashBoard" prefHeight="48.0" prefWidth="141.0" text="HomePage" textFill="#f8220a">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/homepage.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="212.0" layoutY="56.0" text="Add Word" textFill="#08ee36">
+         <font>
+            <Font name="Cambria Bold" size="38.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="Word" layoutX="144.0" layoutY="122.0" prefHeight="34.0" prefWidth="317.0" promptText="Enter Word" />
+      <TextArea fx:id="Explain" layoutX="144.0" layoutY="171.0" prefHeight="170.0" prefWidth="317.0" />
+      <Button layoutX="270.0" layoutY="361.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="60.0" text="Add">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

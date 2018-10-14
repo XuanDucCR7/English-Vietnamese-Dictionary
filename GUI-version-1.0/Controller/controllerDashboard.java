@@ -1,14 +1,20 @@
 package Controller;
 
 import Dictionary.TextToSpeak;
+import Dictionary.showAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -92,6 +98,7 @@ public class controllerDashboard extends GenaralController implements Initializa
             displaySelectedItem();
         });
 
+
         listWord.setOnKeyPressed(e -> {
             KeyCode keyCode = e.getCode();
             if (keyCode == KeyCode.ENTER) {
@@ -120,28 +127,56 @@ public class controllerDashboard extends GenaralController implements Initializa
     //Speak
     public void TextToSpeak(ActionEvent e){
         String Text = listWord.getSelectionModel().getSelectedItem();
-        TextToSpeak.playSound(Text);
+        if(Text != null){
+            TextToSpeak.playSound(Text);
+        }
+        else {
+            showAlert.AlertInfo("Please choose a word which you want to listen!!");
+        }
+
     }
 
     public void addFavoriteWord(){
         String selected = listWord.getSelectionModel().getSelectedItem();
-        String query = "UPDATE av SET favorite = ? WHERE word = ?";
-        try{
-            st = con.prepareStatement(query);
-            st.setString(1,"1");
-            st.setString(2,selected);
-            st.executeUpdate();
-            st.close();
+        if(selected != null){
+            String query = "UPDATE av SET favorite = ? WHERE word = ?";
+            try{
+                st = con.prepareStatement(query);
+                st.setString(1,"1");
+                st.setString(2,selected);
+                st.executeUpdate();
+                st.close();
 
 
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
+            refreshListWordFavorite();
         }
-
-        refreshListWordFavorite();
+        else{
+            showAlert.AlertInfo("Please choose a word which you favorite");
+        }
 
     }
 
+    public void clickEditWord(ActionEvent e) throws IOException {
+        Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../fxml/htmlEditor.fxml"));
+        Parent SceneChange = loader.load();
+        Scene scene = new Scene(SceneChange);
+
+        controllerEditor controllerEditor = loader.getController();
+        if(listWord.getSelectionModel().getSelectedItem() != null){
+            controllerEditor.setWord(listWord.getSelectionModel().getSelectedItem());
+            stage.setScene(scene);
+        }
+        else{
+            showAlert.AlertInfo("Please choose a word which you want to edit!!");
+        }
+
+    }
     public void clickGoogleTranslate(ActionEvent e) throws IOException {
         changeScene(e,"../fxml/GoogleTranslate.fxml");
     }

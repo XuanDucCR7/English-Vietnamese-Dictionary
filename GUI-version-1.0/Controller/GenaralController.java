@@ -1,6 +1,7 @@
 package Controller;
 
 import Dictionary.DatabaseConnection;
+import Dictionary.showAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -69,19 +70,24 @@ public class GenaralController {
     protected void deleteWord(ListView<String> listWord, WebEngine webEngine){
         try {
             String selected = listWord.getSelectionModel().getSelectedItem();
-            System.out.println(selected);
+            if(selected != null){
+                System.out.println(selected);
 
-            if (selected != null) {
-                String query = "DELETE FROM av WHERE word=?";
-                st = con.prepareStatement(query);
-                st.setString(1, selected);
-                st.executeUpdate();
+                if (selected != null) {
+                    String query = "DELETE FROM av WHERE word=?";
+                    st = con.prepareStatement(query);
+                    st.setString(1, selected);
+                    st.executeUpdate();
 
-                st.close();
-                rs.close();
+                    st.close();
+                    rs.close();
 
-                refreshDatabase();
-                webEngine.loadContent("");
+                    refreshDatabase();
+                    webEngine.loadContent("");
+                }
+            }
+            else{
+                showAlert.AlertInfo("Please choose a word you want to delete!!");
             }
 
         } catch (Exception e) {
@@ -102,40 +108,6 @@ public class GenaralController {
 
         } catch (SQLException e1) {
             e1.printStackTrace();
-        }
-    }
-
-    protected void addFavorite(ListView<String> listWord){
-        String selected = listWord.getSelectionModel().getSelectedItem();
-        String query = "UPDATE av SET favorite = ? WHERE word = ?";
-        try{
-            st = con.prepareStatement(query);
-            st.setString(1,selected);
-            st.setString(2,selected);
-            st.executeUpdate();
-            st.close();
-
-
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
-
-        String query1 = "SELECT word FROM av WHERE favorite = ?";
-        try{
-            st = con.prepareStatement(query1);
-            st.setString(1,selected);
-            rs = st.executeQuery();
-
-            favoriteWord.clear();
-            while (rs.next()) {
-                favoriteWord.add(rs.getString(1));
-
-            }
-            st.close();
-            rs.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

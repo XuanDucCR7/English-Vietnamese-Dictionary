@@ -83,7 +83,7 @@
                      </ImageView>
                  </graphic>
              </Button>
-             <Button id="Note" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
+             <Button id="Note" mnemonicParsing="false" onAction="#clickEditWord" styleClass="hover_border" stylesheets="@../CSS/button.css">
                  <graphic>
                      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                          <image>

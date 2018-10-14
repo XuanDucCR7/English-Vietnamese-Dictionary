@@ -20,7 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GenaralController {
+public class GeneralController {
 
     protected Connection con = DatabaseConnection.getConnection();
     protected PreparedStatement st;
@@ -28,6 +28,7 @@ public class GenaralController {
 
     protected ObservableList<String> items = FXCollections.observableArrayList();
     protected ObservableList<String> favoriteWord = FXCollections.observableArrayList();
+    protected ObservableList<String> recentWord = FXCollections.observableArrayList();
     protected FilteredList<String> filteredItems = new FilteredList<>(items, e -> true);
 
     protected void refreshDatabase() {
@@ -48,11 +49,28 @@ public class GenaralController {
         }
     }
 
-    protected void refreshListWordFavorite(){
-        String query1 = "SELECT word FROM av WHERE favorite = ? ";
+    protected void refreshListWordRecent(){
+        String query1 = "SELECT word FROM av WHERE recent > 0 ORDER BY recent DESC";
         try{
             st = con.prepareStatement(query1);
-            st.setString(1,"1");
+            rs = st.executeQuery();
+
+            recentWord.clear();
+            while (rs.next()) {
+                recentWord.add(rs.getString(1));
+            }
+            st.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void refreshListWordFavorite(){
+        String query1 = "SELECT word FROM av WHERE favorite = 1";
+        try{
+            st = con.prepareStatement(query1);
             rs = st.executeQuery();
 
             favoriteWord.clear();

@@ -7,7 +7,7 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 import java.io.IOException;
 
 public class TextToSpeak {
-    static SynthesiserV2 synthesizer = new SynthesiserV2("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw");
+    static SynthesiserV2 synthesizer = new SynthesiserV2("");
 
     public static void playSound(String text) {
         //Create a new Thread because JLayer is running on the current Thread and will make the application to lag

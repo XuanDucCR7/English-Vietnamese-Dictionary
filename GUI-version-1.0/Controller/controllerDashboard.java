@@ -19,15 +19,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class controllerDashboard extends GenaralController implements Initializable {
+public class controllerDashboard extends GeneralController implements Initializable {
     @FXML
     private TextField search;
     @FXML
     private ListView<String> listWord;
     @FXML
     private ListView<String> listWordFavorite;
+    @FXML
+    private ListView<String> listWordRecent;
     @FXML
     private WebView webView;
     private WebEngine webEngine;
@@ -49,17 +52,32 @@ public class controllerDashboard extends GenaralController implements Initializa
             e.printStackTrace();
         }
 
-        String query1 = "SELECT word FROM av WHERE favorite = ? ";
+        String query1 = "SELECT word FROM av WHERE favorite = 1";
         try{
-            st = con.prepareStatement(query1);
-            st.setString(1,"1");
+            st = con.prepareStatement(query1);;
             rs = st.executeQuery();
 
             favoriteWord.clear();
             while (rs.next()) {
                 favoriteWord.add(rs.getString(1));
                 listWordFavorite.setItems(favoriteWord);
+            }
+            st.close();
+            rs.close();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String query2 = "SELECT word FROM av WHERE recent > 0 ORDER BY recent DESC";
+        try{
+            st = con.prepareStatement(query2);
+            rs = st.executeQuery();
+
+            recentWord.clear();
+            while (rs.next()) {
+                recentWord.add(rs.getString(1));
+                listWordRecent.setItems(recentWord);
             }
             st.close();
             rs.close();
@@ -70,39 +88,58 @@ public class controllerDashboard extends GenaralController implements Initializa
     }
 
     @FXML
-    private void handleDeleteEvent() {
+    public void handleDeleteEvent() {
         deleteWord(listWord, webEngine);
     }
 
-    private void displaySelectedItem() {
+    private void displaySelectedItem(ListView<String> list) {
         String query = "SELECT html FROM av WHERE word=?";
+        String query1 = "SELECT MAX(recent) FROM av";
+        String query2 = "UPDATE av SET recent=? WHERE word=?";
 
         try {
             st = con.prepareStatement(query);
-            st.setString(1, listWord.getSelectionModel().getSelectedItem());
+            st.setString(1, list.getSelectionModel().getSelectedItem());
             rs = st.executeQuery();
 
             while (rs.next()) {
                 webEngine.loadContent(rs.getString(1));
             }
-            st.close();
-            rs.close();
+
+            st = con.prepareStatement(query1);
+            rs = st.executeQuery();
+
+            if (list != listWordRecent) {
+
+                int maxValue = 0;
+                if (rs.getObject(1) != null) maxValue = rs.getInt(1);
+
+                System.out.println(maxValue);
+
+                st = con.prepareStatement(query2);
+                st.setString(1, String.valueOf(maxValue + 1));
+                st.setString(2, list.getSelectionModel().getSelectedItem());
+                st.executeUpdate();
+
+                st.close();
+                rs.close();
+                refreshListWordRecent();
+            }
 
         } catch (SQLException se) {
             se.printStackTrace();
         }
     }
 
-    private void handleSelectEvent() {
-        listWord.setOnMouseClicked(e -> {
-            displaySelectedItem();
+    private void handleSelectEvent(ListView<String> list) {
+        list.setOnMouseClicked(e -> {
+            displaySelectedItem(list);
         });
 
-
-        listWord.setOnKeyPressed(e -> {
+        list.setOnKeyPressed(e -> {
             KeyCode keyCode = e.getCode();
             if (keyCode == KeyCode.ENTER) {
-                displaySelectedItem();
+                displaySelectedItem(list);
             }
         });
     }
@@ -127,13 +164,7 @@ public class controllerDashboard extends GenaralController implements Initializa
     //Speak
     public void TextToSpeak(ActionEvent e){
         String Text = listWord.getSelectionModel().getSelectedItem();
-        if(Text != null){
-            TextToSpeak.playSound(Text);
-        }
-        else {
-            showAlert.AlertInfo("Please choose a word which you want to listen!!");
-        }
-
+        TextToSpeak.playSound(Text);
     }
 
     public void addFavoriteWord(){
@@ -177,6 +208,7 @@ public class controllerDashboard extends GenaralController implements Initializa
         }
 
     }
+
     public void clickGoogleTranslate(ActionEvent e) throws IOException {
         changeScene(e,"../fxml/GoogleTranslate.fxml");
     }
@@ -190,6 +222,8 @@ public class controllerDashboard extends GenaralController implements Initializa
     public void initialize(URL location, ResourceBundle resources) {
         webEngine = webView.getEngine();
         loadDatabase();
-        handleSelectEvent();
+        handleSelectEvent(listWord);
+        handleSelectEvent(listWordFavorite);
+        handleSelectEvent(listWordRecent);
     }
 }

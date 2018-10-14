@@ -9,7 +9,7 @@ import javafx.scene.control.TextArea;
 import java.io.IOException;
 
 
-public class controllerAddWord extends GenaralController {
+public class controllerAddWord extends GeneralController {
     @FXML
     private TextArea Word;
     @FXML

@@ -9,7 +9,7 @@ import javafx.scene.web.HTMLEditor;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class controllerEditor extends GenaralController{
+public class controllerEditor extends GeneralController{
     @FXML
     private TextArea Word;
 
@@ -52,7 +52,7 @@ public class controllerEditor extends GenaralController{
         }
 
         refreshDatabase();
-        showAlert.AlertInfo("Your your has been edited!");
+        showAlert.AlertInfo("Your word has been edited!");
         changeScene(e, "../fxml/Dashboard.fxml");
 
     }

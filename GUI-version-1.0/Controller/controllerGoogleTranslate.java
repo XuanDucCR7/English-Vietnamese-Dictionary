@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class controllerGoogleTranslate extends GenaralController implements Initializable {
+public class controllerGoogleTranslate extends GeneralController implements Initializable {
 
     @FXML
     private TextArea sourceText;

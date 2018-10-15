@@ -88,21 +88,20 @@ public class GeneralController {
     protected void deleteWord(ListView<String> listWord, WebEngine webEngine){
         try {
             String selected = listWord.getSelectionModel().getSelectedItem();
+
             if(selected != null){
                 System.out.println(selected);
 
-                if (selected != null) {
-                    String query = "DELETE FROM av WHERE word=?";
-                    st = con.prepareStatement(query);
-                    st.setString(1, selected);
-                    st.executeUpdate();
+                String query = "DELETE FROM av WHERE word=?";
+                st = con.prepareStatement(query);
+                st.setString(1, selected);
+                st.executeUpdate();
 
-                    st.close();
-                    rs.close();
+                st.close();
+                rs.close();
 
-                    refreshDatabase();
-                    webEngine.loadContent("");
-                }
+                refreshDatabase();
+                webEngine.loadContent("");
             }
             else{
                 showAlert.AlertInfo("Please choose a word you want to delete!!");
@@ -114,15 +113,28 @@ public class GeneralController {
     }
 
     protected void addWord(String Word, String Explain){
+        String existQuery = "SELECT word FROM av WHERE word=?";
         String query = "INSERT INTO av (word, html) VALUES(?,?)";
-        try{
-            st = con.prepareStatement(query);
+        try {
+            st = con.prepareStatement(existQuery);
             st.setString(1, Word);
-            st.setString(2, Explain);
-            st.execute();
-            st.close();
+            rs = st.executeQuery();
 
-            refreshDatabase();
+            if (rs.next()) {
+                showAlert.AlertInfo("Your word has already existed in the database!");
+
+            } else {
+                st = con.prepareStatement(query);
+                st.setString(1, Word);
+                st.setString(2, Explain);
+                st.execute();
+
+                refreshDatabase();
+                showAlert.AlertInfo("Successful!");
+            }
+
+            st.close();
+            rs.close();
 
         } catch (SQLException e1) {
             e1.printStackTrace();

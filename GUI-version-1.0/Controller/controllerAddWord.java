@@ -33,7 +33,6 @@ public class controllerAddWord extends GeneralController {
         controller.addWord(Word.getText(), Explain.getText());
         Word.setText("");
         Explain.setText("");
-        showAlert.AlertInfo("Successful!");
     }
 
     public void goBackDashBoard(ActionEvent e) throws IOException {

@@ -217,6 +217,9 @@ public class controllerDashboard extends GeneralController implements Initializa
         changeScene(e,"../fxml/AddWord.fxml");
     }
 
+    public void logIn(ActionEvent e) throws IOException {
+        changeScene(e, "../fxml/LogIn.fxml");
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

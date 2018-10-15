@@ -1,10 +1,9 @@
 package Controller;
 
-import Dictionary.showAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
+import javafx.scene.web.HTMLEditor;
 
 import java.io.IOException;
 
@@ -13,26 +12,13 @@ public class controllerAddWord extends GeneralController {
     @FXML
     private TextArea Word;
     @FXML
-    private TextArea Explain;
+    private HTMLEditor Explain;
 
 
     public void add(ActionEvent e){
-        FXMLLoader loader;
-        loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/Dashboard.fxml"));
-        try
-        {
-            loader.load();
-        }
-        catch (IOException ex)
-        {
-            System.out.println(ex.getMessage());
-        }
-
-        controllerDashboard controller =loader.getController();
-        controller.addWord(Word.getText(), Explain.getText());
+        addWord(Word.getText(), Explain.getHtmlText());
         Word.setText("");
-        Explain.setText("");
+        Explain.setHtmlText("");
     }
 
     public void goBackDashBoard(ActionEvent e) throws IOException {

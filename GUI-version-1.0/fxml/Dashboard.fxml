@@ -169,7 +169,7 @@
             </Button>
          </children>
       </VBox>
-      <MenuBar layoutY="2.0" prefHeight="30.0" prefWidth="834.0">
+      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="30.0" prefWidth="834.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>

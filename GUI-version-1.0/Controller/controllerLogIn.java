@@ -18,28 +18,26 @@ public class controllerLogIn extends GeneralController{
     String us = null;
     String ps = null;
 
-    public void logIn(ActionEvent e1){
+    public void logIn(ActionEvent e) throws IOException {
         us = username.getText();
         ps = password.getText();
         String query = "SELECT username FROM users WHERE username = ?";
-        try{
+
+        try {
             st = con.prepareStatement(query);
             st.setString(1,us);
             //st.setString(2,ps);
             rs = st.executeQuery();
             if(rs.next()){
-                changeScene(e1,"../fxml/Dashboard.fxml");
-
+                changeScene(e,"../fxml/Dashboard.fxml");
             }
             else{
                 showAlert.AlertInfo("Username or password is incorrect!!");
             }
             st.close();
             rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
         }
     }
 }

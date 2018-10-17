@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -37,6 +34,8 @@ public class controllerDashboard extends GeneralController implements Initializa
     private WebView webView;
     @FXML
     private TabPane tabPane;
+    @FXML
+    private MenuBar menuBar;
     private WebEngine webEngine;
 
     private void loadDatabase() {
@@ -220,6 +219,7 @@ public class controllerDashboard extends GeneralController implements Initializa
 
     }
 
+    @FXML
     public void clickEditWord(ActionEvent e) throws IOException {
         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
@@ -238,16 +238,23 @@ public class controllerDashboard extends GeneralController implements Initializa
 
     }
 
+    @FXML
     public void clickGoogleTranslate(ActionEvent e) throws IOException {
         changeScene(e,"../fxml/GoogleTranslate.fxml");
     }
 
+    @FXML
     public void clickAddWord(ActionEvent e) throws IOException {
         changeScene(e,"../fxml/AddWord.fxml");
     }
 
-    public void logIn(ActionEvent e) throws IOException {
-        changeScene(e, "../fxml/LogIn.fxml");
+    @FXML
+    public void logIn() throws IOException {
+        Stage stage = (Stage)menuBar.getScene().getWindow();
+        Parent SceneChange = FXMLLoader.load(getClass().getResource("../fxml/LogIn.fxml"));
+        Scene scene = new Scene(SceneChange);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override

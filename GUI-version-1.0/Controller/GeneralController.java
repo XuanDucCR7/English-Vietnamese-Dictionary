@@ -50,9 +50,9 @@ public class GeneralController {
     }
 
     protected void refreshListWordRecent(){
-        String query1 = "SELECT word FROM av WHERE recent > 0 ORDER BY recent DESC";
+        String query = "SELECT word FROM av WHERE recent > 0 ORDER BY recent DESC";
         try{
-            st = con.prepareStatement(query1);
+            st = con.prepareStatement(query);
             rs = st.executeQuery();
 
             recentWord.clear();
@@ -68,9 +68,9 @@ public class GeneralController {
     }
 
     protected void refreshListWordFavorite(){
-        String query1 = "SELECT word FROM av WHERE favorite = 1";
+        String query = "SELECT word FROM av WHERE favorite = 1";
         try{
-            st = con.prepareStatement(query1);
+            st = con.prepareStatement(query);
             rs = st.executeQuery();
 
             favoriteWord.clear();

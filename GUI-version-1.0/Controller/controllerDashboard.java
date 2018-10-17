@@ -9,7 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebEngine;
@@ -33,6 +35,8 @@ public class controllerDashboard extends GeneralController implements Initializa
     private ListView<String> listWordRecent;
     @FXML
     private WebView webView;
+    @FXML
+    private TabPane tabPane;
     private WebEngine webEngine;
 
     private void loadDatabase() {
@@ -114,8 +118,6 @@ public class controllerDashboard extends GeneralController implements Initializa
                 int maxValue = 0;
                 if (rs.getObject(1) != null) maxValue = rs.getInt(1);
 
-                System.out.println(maxValue);
-
                 st = con.prepareStatement(query2);
                 st.setString(1, String.valueOf(maxValue + 1));
                 st.setString(2, list.getSelectionModel().getSelectedItem());
@@ -162,28 +164,55 @@ public class controllerDashboard extends GeneralController implements Initializa
     }
 
     //Speak
-    public void TextToSpeak(ActionEvent e){
-        String Text = listWord.getSelectionModel().getSelectedItem();
-        TextToSpeak.playSound(Text);
+    @FXML
+    public void TextToSpeak(){
+        String currentTab = tabPane.getSelectionModel().getSelectedItem().getText();
+        String text = null;
+
+        if (currentTab.equals("Search")) {
+            text = listWord.getSelectionModel().getSelectedItem();
+        } else if (currentTab.equals("Recent")) {
+            text = listWordRecent.getSelectionModel().getSelectedItem();
+        } else if (currentTab.equals("Favourite")) {
+            text = listWordFavorite.getSelectionModel().getSelectedItem();
+        }
+        TextToSpeak.playSound(text);
     }
 
-    public void addFavoriteWord(){
-        String selected = listWord.getSelectionModel().getSelectedItem();
-        if(selected != null){
-            String query = "UPDATE av SET favorite = ? WHERE word = ?";
-            try{
+    @FXML
+    public void addFavoriteWord() {
+        String currentTab = tabPane.getSelectionModel().getSelectedItem().getText();
+        String selected = null;
+
+        if (currentTab.equals("Search")) {
+            selected = listWord.getSelectionModel().getSelectedItem();
+        } else if (currentTab.equals("Recent")) {
+            selected = listWordRecent.getSelectionModel().getSelectedItem();
+        } else if (currentTab.equals("Favourite")) {
+            selected = listWordFavorite.getSelectionModel().getSelectedItem();
+        }
+
+        if(selected != null) {
+
+            String query = null;
+
+            if (currentTab.equals("Search") || currentTab.equals("Recent")) {
+                query = "UPDATE av SET favorite = 1 WHERE word = ?";
+            } else if (currentTab.equals("Favourite")) {
+                query = "UPDATE av SET favorite = 0 WHERE word = ?";
+            }
+
+            try {
                 st = con.prepareStatement(query);
-                st.setString(1,"1");
-                st.setString(2,selected);
+                st.setString(1,selected);
                 st.executeUpdate();
                 st.close();
 
+                refreshListWordFavorite();
 
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-
-            refreshListWordFavorite();
         }
         else{
             showAlert.AlertInfo("Please choose a word which you favorite");

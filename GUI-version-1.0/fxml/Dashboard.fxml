@@ -37,7 +37,7 @@
       </VBox>
       <VBox layoutX="139.0" layoutY="142.0" prefHeight="440.0" prefWidth="213.0">
          <children>
-            <TabPane prefHeight="439.0" prefWidth="224.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" prefHeight="439.0" prefWidth="224.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab id="Search" text="Search">
                   <content>

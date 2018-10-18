@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="520.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerAddWord">
+<AnchorPane prefHeight="567.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerAddWord">
    <children>
       <Button layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBackDashBoard" prefHeight="48.0" prefWidth="141.0" text="HomePage" textFill="#f8220a">
          <font>
@@ -29,20 +29,20 @@
          </font>
       </Label>
       <TextArea fx:id="Word" layoutX="8.0" layoutY="148.0" prefHeight="34.0" prefWidth="151.0" promptText="Enter Word" />
-      <Button layoutX="54.0" layoutY="200.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="60.0" text="Add">
+      <Button layoutX="54.0" layoutY="200.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="60.0" stylesheets="@../CSS/effectButton1.css" text="Add">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <HTMLEditor fx:id="Explain" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="166.0" layoutY="109.0" prefHeight="442.0" prefWidth="600.0" AnchorPane.rightAnchor="0.0" />
-      <Label layoutX="57.0" layoutY="120.0" text="Word">
+      <HTMLEditor fx:id="Explain" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="165.0" layoutY="109.0" prefHeight="442.0" prefWidth="600.0" AnchorPane.rightAnchor="22.0" />
+      <Label layoutX="54.0" layoutY="109.0" text="Word" textFill="#13d383">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="88.0" layoutY="338.0" text="Explain:">
+      <Label layoutX="73.0" layoutY="330.0" text="Explain:" textFill="#0fd343">
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="23.0" />
          </font>
       </Label>
    </children>

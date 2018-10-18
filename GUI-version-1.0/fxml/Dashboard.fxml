@@ -11,40 +11,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="593.0" prefWidth="834.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerDashboard">
+<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="599.0" prefWidth="848.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.controllerDashboard">
    <children>
-      <VBox id="Option" alignment="BOTTOM_LEFT" layoutX="8.0" layoutY="463.0" prefHeight="116.0" prefWidth="124.0">
+      <VBox layoutX="139.0" layoutY="107.0" prefHeight="475.0" prefWidth="213.0" style="-fx-border-color: #2196f3;">
          <children>
-             <Button id="Setting" mnemonicParsing="false" styleClass="hover_border" stylesheets="@../CSS/button.css">
-                 <graphic>
-                     <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                         <image>
-                             <Image url="@../Images/setting.png" />
-                         </image>
-                     </ImageView>
-                 </graphic>
-             </Button>
-             <Button id="Information" mnemonicParsing="false" prefHeight="49.0" prefWidth="57.0" styleClass="hover_border" stylesheets="@../CSS/button.css">
-                 <graphic>
-                     <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                         <image>
-                             <Image url="@../Images/information.png" />
-                         </image>
-                     </ImageView>
-                 </graphic>
-             </Button>
-         </children>
-      </VBox>
-      <VBox layoutX="139.0" layoutY="142.0" prefHeight="440.0" prefWidth="213.0">
-         <children>
-            <TabPane fx:id="tabPane" prefHeight="439.0" prefWidth="224.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" prefHeight="476.0" prefWidth="213.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab id="Search" text="Search">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="230.0">
                            <children>
                               <TextField fx:id="search" layoutY="1.0" onKeyPressed="#handleSearchEvent" prefHeight="31.0" prefWidth="212.0" promptText="Search" />
-                              <ListView fx:id="listWord" layoutY="32.0" prefHeight="378.0" prefWidth="212.0" />
+                              <ListView fx:id="listWord" layoutY="32.0" prefHeight="416.0" prefWidth="212.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -72,60 +50,68 @@
             </TabPane>
          </children>
       </VBox>
-      <VBox layoutX="352.0" layoutY="194.0" prefHeight="388.0" prefWidth="55.0">
+      <VBox layoutX="352.0" layoutY="152.0" prefHeight="430.0" prefWidth="55.0">
          <children>
-             <Button id="Favourtite" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addFavoriteWord" styleClass="hover_border" stylesheets="@../CSS/button.css">
+             <Button id="Favourtite" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addFavoriteWord" prefHeight="45.0" prefWidth="45.0" stylesheets="@../CSS/effectButton.css">
                  <graphic>
-                     <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                          <image>
-                             <Image url="@../Images/favourite.png" />
+                             <Image url="@../Images/like.png" />
                          </image>
                      </ImageView>
                  </graphic>
              </Button>
-             <Button id="Note" mnemonicParsing="false" onAction="#clickEditWord" styleClass="hover_border" stylesheets="@../CSS/button.css">
+             <Button id="Note" mnemonicParsing="false" onAction="#clickEditWord" stylesheets="@../CSS/effectButton.css">
                  <graphic>
-                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                          <image>
-                             <Image url="@../Images/note.jpg" />
+                             <Image url="@../Images/note.png" />
                          </image>
                      </ImageView>
                  </graphic>
              </Button>
-             <Button id="Add" mnemonicParsing="false" onAction="#clickAddWord" styleClass="hover_border" stylesheets="@../CSS/button.css">
-                 <graphic>
-                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+             <Button id="Add" mnemonicParsing="false" onAction="#clickAddWord" stylesheets="@../CSS/effectButton.css">
+               <graphic>
+                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                              <Image url="@../Images/add.png" />
                          </image>
                      </ImageView>
-                 </graphic>
-             </Button>
-             <Button id="speaker" mnemonicParsing="false" onAction="#TextToSpeak" styleClass="hover_border" stylesheets="@../CSS/button.css">
+               </graphic></Button>
+             <Button id="speaker" mnemonicParsing="false" onAction="#TextToSpeak" stylesheets="@../CSS/effectButton.css">
                  <graphic>
-                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                              <Image url="@../Images/speaker.png" />
                          </image>
                      </ImageView>
                  </graphic>
              </Button>
-             <Button id="Delete" mnemonicParsing="false" onMouseClicked="#handleDeleteEvent" styleClass="hover_border" stylesheets="@../CSS/button.css">
+             <Button id="Delete" mnemonicParsing="false" onMouseClicked="#handleDeleteEvent" stylesheets="@../CSS/effectButton.css">
                  <graphic>
-                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                          <image>
-                             <Image url="@../Images/delete.png" />
+                             <Image url="@../Images/trash.png" />
                          </image>
                      </ImageView>
                  </graphic>
              </Button>
+            <Button id="record" mnemonicParsing="false" onAction="#SpeechToText" stylesheets="@../CSS/effectButton.css">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/radio.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
-      <VBox id="Denifition" layoutX="408.0" layoutY="194.0" prefHeight="388.0" prefWidth="424.0">
+      <VBox id="Denifition" layoutX="408.0" layoutY="152.0" prefHeight="430.0" prefWidth="424.0" style="-fx-border-color: blue;">
          <children>
             <WebView fx:id="webView" prefHeight="388.0" prefWidth="424.0" />
          </children></VBox>
-      <HBox id="Logo" layoutX="14.0" layoutY="37.0" prefHeight="105.0" prefWidth="199.0">
+      <HBox id="Logo" prefHeight="105.0" prefWidth="199.0" style="-fx-background-color: #2196f3;">
          <children>
             <ImageView fitHeight="105.0" fitWidth="222.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -134,16 +120,16 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox layoutX="213.0" layoutY="37.0" prefHeight="105.0" prefWidth="621.0" />
-      <HBox layoutX="579.0" layoutY="147.0" prefHeight="46.0" prefWidth="254.0" />
-      <Label layoutX="408.0" layoutY="147.0" prefHeight="46.0" prefWidth="171.0" style="-fx-background-size: 20;" text="Definition" textFill="#3a11dd">
+      <HBox layoutX="199.0" prefHeight="105.0" prefWidth="649.0" style="-fx-background-color: #2196f3;" />
+      <HBox layoutX="522.0" layoutY="105.0" prefHeight="46.0" prefWidth="310.0" />
+      <Label layoutX="407.0" layoutY="105.0" prefHeight="46.0" prefWidth="114.0" style="-fx-background-size: 20;" text="Definition" textFill="#3a11dd">
          <font>
             <Font name="Times New Roman Bold" size="25.0" />
          </font>
       </Label>
-      <VBox alignment="TOP_CENTER" layoutX="8.0" layoutY="170.0" prefHeight="293.0" prefWidth="125.0">
+      <VBox alignment="TOP_CENTER" layoutX="8.0" layoutY="137.0" prefHeight="454.0" prefWidth="125.0">
          <children>
-             <Button id="google Translate" contentDisplay="TOP" mnemonicParsing="false" onAction="#clickGoogleTranslate" prefHeight="59.0" prefWidth="124.0" text="Google Traslate" textFill="#3a12cd">
+             <Button id="google Translate" contentDisplay="TOP" mnemonicParsing="false" onAction="#clickGoogleTranslate" prefHeight="59.0" prefWidth="124.0" stylesheets="@../CSS/effectButton2.css" text="Google Traslate" textFill="#3a12cd">
                  <graphic>
                      <ImageView fitHeight="34.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                          <image>
@@ -154,39 +140,12 @@
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
+               <styleClass>
+                  <String fx:value="cursor_hand" />
+                  <String fx:value="hower_border" />
+               </styleClass>
              </Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logIn" prefHeight="70.0" prefWidth="127.0" text="Your Dictionary" textFill="#f50e0e">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-                <graphic>
-                    <ImageView fitHeight="37.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                            <Image url="@../Images/yourDictionary.png" />
-                        </image>
-                    </ImageView>
-                </graphic>
-            </Button>
          </children>
       </VBox>
-      <MenuBar fx:id="menuBar" layoutY="2.0" prefHeight="30.0" prefWidth="834.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#logIn" text="Log In" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package Controller;
 
+import Dictionary.SpeechToText;
 import Dictionary.TextToSpeak;
 import Dictionary.showAlert;
 import javafx.event.ActionEvent;
@@ -18,7 +19,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class controllerDashboard extends GeneralController implements Initializable {
@@ -57,7 +57,7 @@ public class controllerDashboard extends GeneralController implements Initializa
 
         String query1 = "SELECT word FROM av WHERE favorite = 1";
         try{
-            st = con.prepareStatement(query1);;
+            st = con.prepareStatement(query1);
             rs = st.executeQuery();
 
             favoriteWord.clear();
@@ -92,7 +92,21 @@ public class controllerDashboard extends GeneralController implements Initializa
 
     @FXML
     public void handleDeleteEvent() {
-        deleteWord(listWord, webEngine);
+        String currentTab = tabPane.getSelectionModel().getSelectedItem().getText();
+        if (currentTab.equals("Search")) {
+            deleteWord(listWord, webEngine);
+            refreshListWordFavorite();
+            refreshListWordRecent();
+        } else if (currentTab.equals("Recent")) {
+            deleteWord(listWordRecent, webEngine);
+            refreshListWordFavorite();
+            refreshListWordRecent();
+        } else if (currentTab.equals("Favourite")) {
+            deleteWord(listWordFavorite, webEngine);
+            refreshListWordFavorite();
+            refreshListWordRecent();
+        }
+
     }
 
     private void displaySelectedItem(ListView<String> list) {
@@ -178,6 +192,19 @@ public class controllerDashboard extends GeneralController implements Initializa
         TextToSpeak.playSound(text);
     }
 
+    private int status = -1;
+    @FXML
+    public void SpeechToText(){
+        status = status * -1;
+        if(status == 1){
+            SpeechToText.startSpeechRecognition(search, "en");
+            handleSearchEvent();
+
+        }
+        else if(status == -1){
+            SpeechToText.stopSpeechRecognition();
+        }
+    }
     @FXML
     public void addFavoriteWord() {
         String currentTab = tabPane.getSelectionModel().getSelectedItem().getText();
@@ -221,6 +248,7 @@ public class controllerDashboard extends GeneralController implements Initializa
 
     @FXML
     public void clickEditWord(ActionEvent e) throws IOException {
+        String currentTab = tabPane.getSelectionModel().getSelectedItem().getText();
         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../fxml/htmlEditor.fxml"));
@@ -228,14 +256,20 @@ public class controllerDashboard extends GeneralController implements Initializa
         Scene scene = new Scene(SceneChange);
 
         controllerEditor controllerEditor = loader.getController();
-        if(listWord.getSelectionModel().getSelectedItem() != null){
+        if (currentTab.equals("Search")) {
             controllerEditor.setWord(listWord.getSelectionModel().getSelectedItem());
+        } else if (currentTab.equals("Recent")) {
+            controllerEditor.setWord(listWordRecent.getSelectionModel().getSelectedItem());
+        } else if (currentTab.equals("Favourite")) {
+            controllerEditor.setWord(listWordFavorite.getSelectionModel().getSelectedItem());
+        }
+
+        if(controllerEditor.getWord() != null) {
             stage.setScene(scene);
         }
         else{
             showAlert.AlertInfo("Please choose a word which you want to edit!!");
         }
-
     }
 
     @FXML

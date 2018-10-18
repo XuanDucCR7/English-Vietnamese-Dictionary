@@ -18,6 +18,9 @@ public class controllerEditor extends GeneralController{
 
     private int id;
 
+    public String getWord(){
+        return Word.getText();
+    }
     public void setWord(String word){
         Word.setText(word);
         String query = "SELECT id,html FROM av WHERE word = ?";

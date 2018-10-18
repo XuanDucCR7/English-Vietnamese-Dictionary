@@ -1,6 +1,7 @@
 package Controller;
 
 import Dictionary.LanguageCode;
+import Dictionary.SpeechToText;
 import Dictionary.TextToSpeak;
 import Dictionary.showAlert;
 import com.darkprograms.speech.translator.GoogleTranslate;
@@ -10,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,8 +68,27 @@ public class controllerGoogleTranslate extends GeneralController implements Init
         TextToSpeak.playSound(targetText.getText());
     }
 
+    int status = -1;
+    public void SpeechToText() throws IOException {
+        if(SourceLanguageCode == null || TargetLanguageCode == null) {
+            showAlert.AlertInfo("Please choose language");
+            sourceText.setText("");
+            targetText.setText("");
+        }else {
+            status = status * -1;
+            if(status == 1){
+                SpeechToText.startSpeechRecognition(sourceText, targetText, SourceLanguageCode, TargetLanguageCode);
+                getSourceText();
+            }
+            else if(status == -1){
+                SpeechToText.stopSpeechRecognition();
+            }
+        }
+
+    }
+
     //
-    public void getSourceText(KeyEvent e) throws IOException {
+    public void getSourceText() throws IOException {
         if(SourceLanguageCode == null || TargetLanguageCode == null){
             showAlert.AlertInfo("Please choose language");
             sourceText.setText("");
